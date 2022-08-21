@@ -178,14 +178,15 @@ def Admin():
                 if st.button('Add User'):
                     employee_name = st.sidebar.text_input('Employee Name')
                     img_file_buffer = st.camera_input("Register")
-                    bytes_data = img_file_buffer.getvalue()
-                    cv2_img = cv2.imdecode(np.frombuffer(bytes_data, np.uint8), cv2.IMREAD_COLOR)  
-                    cv2_img = cv2.cvtColor(cv2_img, cv2.COLOR_BGR2RGB)
-                    img = np.array(cv2_img)
-                    st.image(img)
-                    if st.button('Register Employee'):
-                        cv2.imwrite(f'employee images/{employee_name}.jpg', img)
-                        st.success("{employee_name} Registered")
+                    if img_file_buffer is not None:
+                        bytes_data = img_file_buffer.getvalue()
+                        cv2_img = cv2.imdecode(np.frombuffer(bytes_data, np.uint8), cv2.IMREAD_COLOR)  
+                        cv2_img = cv2.cvtColor(cv2_img, cv2.COLOR_BGR2RGB)
+                        img = np.array(cv2_img)
+                        st.image(img)
+                        if st.button('Register Employee'):
+                            cv2.imwrite(f'employee images/{employee_name}.jpg', img)
+                            st.success("{employee_name} Registered")
            
     
     
