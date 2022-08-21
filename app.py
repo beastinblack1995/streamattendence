@@ -159,9 +159,9 @@ def emprec(img):
 def Admin():
     result = 0
     
-    user = st.sidebar.text_input('Username')
-    passwd = st.sidebar.text_input('Password',type='password')
-    if st.sidebar.checkbox('Login') :
+    user = st.text_input('Username')
+    passwd = st.text_input('Password',type='password')
+    if st.button('Login') :
 
         if user == 'Beastinblack' and passwd == 'AkashRaj' :
             
@@ -177,18 +177,20 @@ def Admin():
                     dx.to_csv('attendence.csv') 
                 if st.button('Add User'):
                     employee_name = st.text_input('Employee Name')
+                    
                     if st.button('Next'):
-                        if employee_name:
-                            img_file_buffer = st.camera_input("Register")
-                            if img_file_buffer is not None:
-                                bytes_data = img_file_buffer.getvalue()
-                                cv2_img = cv2.imdecode(np.frombuffer(bytes_data, np.uint8), cv2.IMREAD_COLOR)  
-                                cv2_img = cv2.cvtColor(cv2_img, cv2.COLOR_BGR2RGB)
-                                img = np.array(cv2_img)
-                                st.image(img)
-                                if st.button('Register Employee'):
-                                    cv2.imwrite(f'employee images/{employee_name}.jpg', img)
-                                    st.success("{employee_name} Registered")
+                        print(employee_name)
+
+                        img_file_buffer = st.camera_input("Register")
+                        if img_file_buffer is not None:
+                            bytes_data = img_file_buffer.getvalue()
+                            cv2_img = cv2.imdecode(np.frombuffer(bytes_data, np.uint8), cv2.IMREAD_COLOR)  
+                            cv2_img = cv2.cvtColor(cv2_img, cv2.COLOR_BGR2RGB)
+                            img = np.array(cv2_img)
+                            st.image(img)
+                            if st.button('Register Employee'):
+                                cv2.imwrite(f'employee images/{employee_name}.jpg', img)
+                                st.success("{employee_name} Registered")
            
     
     
