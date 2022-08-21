@@ -93,7 +93,7 @@ def main():
     pages = {
 
         "Attendence ": employ_recog,        
-
+        "Admin ": Admin,       
     }
     page_titles = pages.keys()
 
@@ -156,7 +156,42 @@ def emprec(img):
     return img   
 
         
+def Admin():
     
+    user = st.sidebar.text_input('Username')
+    passwd = st.sidebar.text_input('Password',type='password')
+    if st.sidebar.checkbox('Login') :
+        create_usertable()
+        hashed_pswd = make_hashes(passwd)
+        result = login_user(user,check_hashes(passwd,hashed_pswd))
+        if result:
+            st.success("Logged In as {}".format(user))
+
+            # Tasks For Only Logged In Users
+        if st.button('show attendence'):
+            st.dataframe(pd.read_csv('attendence.csv'))
+        if st.button('clear attendence'):
+            dx = pd.DataFrame() 
+            dx.to_csv('attendence.csv') 
+        if st.button('Add User'):
+            employee_name = st.sidebar.text_input('Employee Name')
+            img_file_buffer = st.camera_input("Register")
+            bytes_data = img_file_buffer.getvalue()
+            cv2_img = cv2.imdecode(np.frombuffer(bytes_data, np.uint8), cv2.IMREAD_COLOR)  
+            cv2_img = cv2.cvtColor(cv2_img, cv2.COLOR_BGR2RGB)
+            img = np.array(cv2_img)
+            st.image(img)
+            if st.button('Register Employee'):
+                cv2.imwrite(f'employee images/{employee_name}.jpg', img)
+                st.success("{employee_name} Registered")
+ 
+    
+    
+    
+
+
+
+
     
 def employ_recog():
 
