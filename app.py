@@ -162,7 +162,7 @@ def Admin():
     user = st.sidebar.text_input('Username')
     passwd = st.sidebar.text_input('Password',type='password')
     if st.sidebar.checkbox('Login') :
-)
+
         if user == 'Beastinblack' and passwd == 'AkashRaj' :
             
             st.success("Logged In as {}".format(user))
