@@ -242,37 +242,36 @@ def app_video_filters():
 def emprec(img):    
     
     facesInFrame = face_rec.face_locations(img)
-    if len(facesInFrame) > 0:
-        encodeFacesInFrame = face_rec.face_encodings(img, facesInFrame)
+
+    encodeFacesInFrame = face_rec.face_encodings(img, facesInFrame)
 
 
-        for encodeFace, faceloc in zip(encodeFacesInFrame, facesInFrame) :
-            matches = face_rec.compare_faces(EncodeList, encodeFace)
-            facedis = face_rec.face_distance(EncodeList, encodeFace)
-            print(facedis)
-            if min(facedis) < 0.5:
-                matchIndex = np.argmin(facedis)
+    for encodeFace, faceloc in zip(encodeFacesInFrame, facesInFrame) :
+        matches = face_rec.compare_faces(EncodeList, encodeFace)
+        facedis = face_rec.face_distance(EncodeList, encodeFace)
+        print(facedis)
+        if min(facedis) < 0.5:
+            matchIndex = np.argmin(facedis)
 
-                print(matchIndex)
+            print(matchIndex)
 
 
-                name = employeeName[matchIndex].upper()
-    #             y1, x2, y2, x1 = faceloc
-    #             y1, x2, y2, x1 = y1*4, x2*4, y2*4, x1*4
+            name = employeeName[matchIndex].upper()
+#             y1, x2, y2, x1 = faceloc
+#             y1, x2, y2, x1 = y1*4, x2*4, y2*4, x1*4
 
-    #             cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), 3)
-    #             cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), cv2.FILLED)
-    #             cv2.putText(img, name, (x1+6, y2-6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2)
+#             cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), 3)
+#             cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), cv2.FILLED)
+#             cv2.putText(img, name, (x1+6, y2-6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2)
 
-                top, right, bottom, left = faceloc
-                cv2.rectangle(img, (left, top), (right, bottom), (0, 255, 0), 2)
-                cv2.putText(img, name,  (left + 6, bottom - 6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 1)
-                print(name)        
-                MarkAttendence(name)
-                return img
-    
-    else:
-        return img
+            top, right, bottom, left = faceloc
+            cv2.rectangle(img, (left, top), (right, bottom), (0, 255, 0), 2)
+            cv2.putText(img, name,  (left + 6, bottom - 6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 1)
+            print(name)        
+            MarkAttendence(name)
+            
+     return img   
+
         
     
     
@@ -287,7 +286,7 @@ def employ_recog():
         return av.VideoFrame.from_ndarray(img, format="bgr24")
 
     webrtc_streamer(
-        key="opencv-filter",
+        key="attendence",
         mode=WebRtcMode.SENDRECV,
         rtc_configuration=RTC_CONFIGURATION,
         video_frame_callback=callback,
