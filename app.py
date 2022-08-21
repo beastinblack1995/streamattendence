@@ -271,7 +271,9 @@ def emprec(img):
                 MarkAttendence(name)
                 return img
     
-    
+    else:
+        return img
+        
     
     
 def employ_recog():
