@@ -177,6 +177,7 @@ def Admin():
                     dx.to_csv('attendence.csv') 
                 if st.button('Add User'):
                     employee_name = st.text_input('Employee Name')
+                    print(employee_name)
                     
                     if st.button('Next'):
                         print(employee_name)
