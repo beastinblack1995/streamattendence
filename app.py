@@ -270,7 +270,7 @@ def emprec(img):
             print(name)        
             MarkAttendence(name)
             
-     return img   
+    return img   
 
         
     
