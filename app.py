@@ -123,6 +123,8 @@ def main():
 
 
 def emprec(img):    
+    print(img,"                    2                   ")
+    
     
     facesInFrame = face_rec.face_locations(img)
 
@@ -152,7 +154,7 @@ def emprec(img):
             cv2.putText(img, name,  (left + 6, bottom - 6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 1)
             print(name)        
             MarkAttendence(name)
-            
+    print(img,"                    3                   ")        
     return img   
 
         
@@ -206,6 +208,7 @@ def employ_recog():
 
     def callback(frame: av.VideoFrame) -> av.VideoFrame:
         img = frame.to_ndarray(format="bgr24")
+        print(img,"                    1                   ")
         img = emprec(img)
 
 
