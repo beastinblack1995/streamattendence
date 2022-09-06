@@ -219,7 +219,7 @@ def employ_recog():
         mode=WebRtcMode.SENDRECV,
         rtc_configuration=RTC_CONFIGURATION,
         video_frame_callback=callback,
-        #media_stream_constraints={"video": True, "audio": False},
+        media_stream_constraints={"video": True, "audio": False},
         async_processing=True,
     )
 
